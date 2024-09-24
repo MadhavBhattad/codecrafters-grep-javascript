@@ -1,11 +1,11 @@
 function matchPattern(inputLine, pattern) {
-  // Replace all occurrences of \d and \w in the pattern using regular expressions
-  let regex = pattern
-      .replace(/\\d/, '[0-9]')          // Replace \d with [0-9] to match digits
-      .replace(/\\w/, '[0-9a-zA-Z]');   // Replace \w with [0-9a-zA-Z] to match word characters
+  let regex = pattern.replace('\\d', '[0-9]').replace('\\w', '[0-9a-zA-Z]');
   
-  // Create a new RegExp from the modified pattern
-  return new RegExp(regex).test(inputLine);
+  if (pattern.length === 1) {
+    return inputLine.includes(pattern);
+  } else{
+    return new RegExp(regex).test(inputLine);
+  }
 }
 
 function main() {
