@@ -1,11 +1,26 @@
 function matchPattern(inputLine, pattern) {
-  let regex = pattern.replace('\\d', '[0-9]').replace('\\w', '[0-9a-zA-Z]');
-  
   if (pattern.length === 1) {
-    return inputLine.includes(pattern);
-  } else{
+    let regex = pattern.replace('\\d', '[0-9]').replace('\\w', '[0-9a-zA-Z]');
+    if (pattern.length === 1) {
+      return inputLine.includes(pattern);        // Match a literal character
+    } else if(pattern === '\\d') {
+      return /\d/.test(inputLine);              // Match digts
+    } else if(pattern === '\\w') {
+      return /\w/.test(inputLine);              // Match alphanumeric characters
+    } else if(pattern[0] === '[' && pattern[pattern.length - 1] === ']') {
+      return new RegExp(`[${pattern.slice(1, pattern.length - 1)}]`).test(inputLine);       // Postitve character group
+    } else if (pattern.startsWith("[^") && pattern.endsWith("]")) {
+      // Matches any character not in the negative character group
+      let groupPattern = pattern.substring(2, pattern.length - 1);                          // Get the negative character group
+      let regex = new RegExp("[^" + groupPattern + "]");
+      return regex.test(inputLine);
+    }
+    else {
+      throw new Error(`Unhandled pattern ${pattern}`);
+    }
+  } else {
     return new RegExp(regex).test(inputLine);
-  }
+   }
 }
 
 function main() {
