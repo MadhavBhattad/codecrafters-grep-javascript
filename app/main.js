@@ -1,5 +1,4 @@
 function matchPattern(inputLine, pattern) {
-  if (pattern.length === 1) {
     let regex = pattern.replace('\\d', '[0-9]').replace('\\w', '[0-9a-zA-Z]');
     if (pattern.length === 1) {
       return inputLine.includes(pattern);        // Match a literal character
@@ -18,9 +17,7 @@ function matchPattern(inputLine, pattern) {
     else {
       throw new Error(`Unhandled pattern ${pattern}`);
     }
-  } else {
     return new RegExp(regex).test(inputLine);
-   }
 }
 
 function main() {
