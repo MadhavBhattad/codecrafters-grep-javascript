@@ -7,6 +7,11 @@ function matchPattern(inputLine, pattern) {
     return /\w/.test(inputLine);
   } else if(pattern[0] === '[' && pattern[pattern.length - 1] === ']') {
     return new RegExp(`[${pattern.slice(1, pattern.length - 1)}]`).test(inputLine);
+  } else if (pattern.startsWith("[^") && pattern.endsWith("]")) {
+    // Matches any character not in the negative character group
+    let groupPattern = pattern.substring(2, pattern.length - 1);
+    let regex = new RegExp("[^" + groupPattern + "]");
+    return regex.test(inputLine);
   }
   else {
     throw new Error(`Unhandled pattern ${pattern}`);
