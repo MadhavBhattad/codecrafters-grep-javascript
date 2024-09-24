@@ -1,8 +1,8 @@
 function matchPattern(inputLine, pattern) {
   // Replace all occurrences of \d and \w in the pattern using regular expressions
   let regex = pattern
-      .replace(/\\d/g, '[0-9]')          // Replace \d with [0-9] to match digits
-      .replace(/\\w/g, '[0-9a-zA-Z]');   // Replace \w with [0-9a-zA-Z] to match word characters
+      .replace(/\\d/, '[0-9]')          // Replace \d with [0-9] to match digits
+      .replace(/\\w/, '[0-9a-zA-Z]');   // Replace \w with [0-9a-zA-Z] to match word characters
   
   // Create a new RegExp from the modified pattern
   return new RegExp(regex).test(inputLine);
