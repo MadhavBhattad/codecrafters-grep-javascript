@@ -1,12 +1,13 @@
 function matchPattern(inputLine, pattern) {
-  // Replace all occurrences of \d and \w in the pattern
+  // Replace all \d with [0-9] and \w with [a-zA-Z0-9_]
   let regexPattern = pattern
-    .replace(/\\d/g, '[0-9]')         // Global replacement for \d (digits)
-    .replace(/\\w/g, '[a-zA-Z0-9_]')
-    .replace(/\\s/g, '\\s');  // Global replacement for \w (word characters)
+    .replace(/\\d/g, '[0-9]')         // Replace all occurrences of \d
+    .replace(/\\w/g, '[a-zA-Z0-9_]'); // Replace all occurrences of \w
 
-  // Use the regex to test against the input line
-  const regex = new RegExp(`^${regexPattern}$`);  // Match the entire input line
+  // Create a new RegExp object to match the entire string (from start to end)
+  const regex = new RegExp('^' + regexPattern + '$');
+  
+  // Test if the inputLine matches the pattern
   return regex.test(inputLine);
 }
 
